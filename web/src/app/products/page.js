@@ -14,6 +14,29 @@ async function getProducts() {
 const formatRp = (n) =>
   new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(n);
 
+const brandLogo = {
+  "mobile-legends": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/mobilelegends.svg",
+  "free-fire": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/garena.svg",
+  "spotify-premium": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/spotify.svg",
+  "chatgpt-plus": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/openai.svg",
+  "netflix-premium": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/netflix.svg",
+  "capcut-pro": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/capcut.svg",
+  "youtube-premium": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/youtube.svg",
+  "canva-pro": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/canva.svg",
+  "disney-hotstar": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/disneyplus.svg",
+  "vidio-platinum": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/vidio.svg",
+  "genshin-impact": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/genshinimpact.svg",
+  "pubg-mobile": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/pubg.svg",
+  "valorant": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/valorant.svg",
+  "pulsa-telkomsel": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/telkomsel.svg",
+  "pulsa-xl": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/xlaxiata.svg",
+  "pulsa-axis": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/axis.svg",
+  "data-telkomsel": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/telkomsel.svg",
+  "token-pln": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/pln.svg",
+  "ai-api-deepseek": "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/deepseek-color.svg",
+  "ai-api-qwen": "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/qwen-color.svg",
+};
+
 export default async function ProductsPage({ searchParams }) {
   const params = await searchParams;
   const type = params?.type;
@@ -25,35 +48,39 @@ export default async function ProductsPage({ searchParams }) {
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      <div className="mb-2 text-xs font-semibold uppercase tracking-wider text-[#4F46E5]">Semua Produk</div>
+      <div className="mb-2 text-xs font-bold uppercase tracking-wider text-[#4F46E5]">Semua Produk</div>
       <h1 className="text-3xl font-bold text-[#0F172A] dark:text-white">Temukan Produk Digital</h1>
       <p className="mt-1 text-[#475569] dark:text-slate-400">Dari pulsa sampai AI API, semua ada di sini</p>
 
-      {/* Filter */}
       <div className="mt-6 flex flex-wrap gap-2">
-        <Link href="/products" className={`rounded-xl px-4 py-2 text-sm font-semibold transition-all ${!type ? "bg-[#4F46E5] text-white shadow-md" : "border border-[#E2E8F0] bg-white text-[#334155] hover:border-[#4F46E5] hover:text-[#4F46E5] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"}`}>
-          <span className="mr-1.5">📋</span> Semua
+        <Link href="/products"
+          className={`rounded-xl px-4 py-2 text-sm font-semibold transition-all ${
+            !type ? "bg-[#4F46E5] text-white shadow-md" : "border border-[#E2E8F0] bg-white text-[#334155] hover:border-[#4F46E5] hover:text-[#4F46E5] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+          }`}>
+          📋 Semua
         </Link>
         {Object.entries(catLabel).map(([k, v]) => (
-          <Link key={k} href={`/products?type=${k}`} className={`rounded-xl px-4 py-2 text-sm font-semibold transition-all ${type === k ? "bg-[#4F46E5] text-white shadow-md" : "border border-[#E2E8F0] bg-white text-[#334155] hover:border-[#4F46E5] hover:text-[#4F46E5] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"}`}>
-            <span className="mr-1.5">{catIcons[k]}</span> {v}
+          <Link key={k} href={`/products?type=${k}`}
+            className={`rounded-xl px-4 py-2 text-sm font-semibold transition-all ${
+              type === k ? "bg-[#4F46E5] text-white shadow-md" : "border border-[#E2E8F0] bg-white text-[#334155] hover:border-[#4F46E5] hover:text-[#4F46E5] dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300"
+            }`}>
+            {catIcons[k]} {v}
           </Link>
         ))}
       </div>
 
-      {/* Grid */}
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {filtered.map((p) => (
-          <Link
-            key={p.slug}
-            href={`/products/${p.slug}`}
-            className="card-hover group p-5 transition-all duration-300"
-            style={{ background: "var(--surface-card)", border: "1px solid var(--border)", borderRadius: "var(--radius-md)", boxShadow: "var(--shadow-md)" }}
-          >
+          <Link key={p.slug} href={`/products/${p.slug}`}
+            className="card group p-5 transition-all duration-200">
             <div className="mb-3 flex items-center justify-between">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE] text-base font-bold text-[#4F46E5] dark:from-indigo-950 dark:to-indigo-800">
-                {p.name.slice(0, 1)}
-              </div>
+              {brandLogo[p.slug] ? (
+                <img src={brandLogo[p.slug]} alt="" className="h-8 w-8 rounded-lg object-contain p-0.5 dark:brightness-200 dark:invert" loading="lazy" />
+              ) : (
+                <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE] text-xs font-bold text-[#4F46E5] dark:from-indigo-950 dark:to-indigo-800">
+                  {p.name.slice(0, 1)}
+                </div>
+              )}
               <span className="rounded-lg bg-[#FAFAFA] px-2.5 py-1 text-[10px] font-semibold text-[#64748B] dark:bg-slate-800 dark:text-slate-400">
                 {catLabel[p.category] || p.category}
               </span>
@@ -61,7 +88,7 @@ export default async function ProductsPage({ searchParams }) {
             <h3 className="text-base font-bold text-[#0F172A] group-hover:text-[#4F46E5] dark:text-white">{p.name}</h3>
             <p className="mt-0.5 text-xs text-[#64748B]">{p.brand}</p>
             <p className="mt-3 text-lg font-bold text-[#4F46E5]">{formatRp(p.min_price)}</p>
-            <p className="mt-1 text-xs text-[#94A3B8]">{p.variants.length} paket tersedia</p>
+            <p className="mt-1 text-xs text-[#94A3B8]">{p.variants.length} paket</p>
           </Link>
         ))}
         {filtered.length === 0 && (

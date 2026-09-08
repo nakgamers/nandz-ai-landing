@@ -3,6 +3,14 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
+const aiLogos = {
+  Claude: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/claude-color.svg",
+  GPT: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/openai.svg",
+  DeepSeek: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/deepseek-color.svg",
+  Qwen: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/qwen-color.svg",
+  GLM: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/chatglm-color.svg",
+};
+
 export default function AiApiPage() {
   const [models, setModels] = useState([]);
   const [key, setKey] = useState("gk-demo-00000000000000000000003e");
@@ -15,7 +23,7 @@ export default function AiApiPage() {
       const res = await fetch("/api/v1/ai/models");
       const data = await res.json();
       setModels(data.models || []);
-    } catch { /* server build: skip */ }
+    } catch { /* skip */ }
   };
   useEffect(() => { loadModels(); }, []);
 
@@ -43,80 +51,90 @@ export default function AiApiPage() {
   return (
     <main className="mx-auto max-w-4xl px-4 py-12">
       <div className="text-center">
-        <span className="inline-block rounded-full bg-indigo-100 px-4 py-1 text-xs font-semibold text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300">
+        <span className="inline-flex items-center gap-2 rounded-full border border-[#E0E7FF] bg-[#F5F3FF] px-4 py-1.5 text-xs font-semibold text-[#4F46E5] dark:border-indigo-800 dark:bg-indigo-950 dark:text-indigo-300">
+          <span className="h-1.5 w-1.5 rounded-full bg-[#4F46E5]"></span>
           AI API — untuk Developer
         </span>
-        <h1 className="mt-4 text-3xl font-bold sm:text-4xl">Pasang AI ke Produkmu</h1>
-        <p className="mx-auto mt-3 max-w-2xl text-slate-600 dark:text-slate-300">
+        <h1 className="mt-4 text-3xl font-bold text-[#0F172A] dark:text-white sm:text-4xl">Pasang AI ke Produkmu</h1>
+        <p className="mx-auto mt-3 max-w-2xl text-[#475569] dark:text-slate-300">
           Satu API key untuk Claude, GPT, DeepSeek, Qwen, dan GLM.{" "}
-          <strong>Bayar sesuai pemakaian — dihitung per token</strong>, tanpa langganan dan tanpa kuota hangus.
+          <strong className="text-[#0F172A] dark:text-white">Bayar sesuai pemakaian — dihitung per token</strong>.
         </p>
       </div>
 
-      {/* API Key demo */}
-      <div className="mt-8 rounded-2xl border border-slate-200 bg-slate-50 p-6 dark:border-slate-800 dark:bg-slate-900">
-        <label className="text-sm font-medium">API Key (demo)</label>
+      {/* API Key */}
+      <div className="card mt-8 p-6">
+        <label className="text-sm font-semibold text-[#0F172A] dark:text-white">API Key (demo)</label>
         <div className="mt-2 flex gap-2">
-          <input value={key} onChange={(e) => setKey(e.target.value)} className="flex-1 rounded-xl border border-slate-300 bg-white px-3 py-2 font-mono text-xs focus:border-indigo-400 focus:outline-none dark:border-slate-600 dark:bg-slate-800" />
-          <button onClick={copy} className="rounded-xl border border-slate-300 px-4 py-2 text-xs font-medium hover:bg-slate-100 dark:border-slate-600 dark:hover:bg-slate-800">
+          <input value={key} onChange={(e) => setKey(e.target.value)}
+            className="input flex-1 font-mono text-xs" />
+          <button onClick={copy}
+            className="rounded-lg border border-[#E2E8F0] bg-white px-4 py-2 text-xs font-semibold text-[#334155] transition hover:bg-[#F5F3FF] hover:text-[#4F46E5] dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300">
             {copied ? "✓ Tersalin" : "Salin"}
           </button>
         </div>
-        <p className="mt-2 text-xs text-slate-400">Key gk-... dikirim otomatis setelah pembelian produk AI API. Di sini pakai key demo dengan saldo Rp 100.000.</p>
+        <p className="mt-2 text-xs text-[#64748B]">Key dengan saldo Rp 100.000 untuk demo. Key asli setelah pembelian.</p>
       </div>
 
-      {/* Model list */}
-      <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Model grid */}
+      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
         {models.map((m) => (
-          <div key={m.id} className="rounded-2xl border border-slate-200 bg-white p-5 dark:border-slate-800 dark:bg-slate-900">
-            <div className="flex items-center justify-between">
-              <h3 className="font-bold">{m.name}</h3>
-              <span className="rounded-full bg-slate-100 px-2 py-0.5 text-[10px] text-slate-500 dark:bg-slate-800">{m.provider}</span>
+          <div key={m.id} className="card p-4">
+            <div className="mb-2 flex items-center justify-between">
+              {aiLogos[m.name] ? (
+                <img src={aiLogos[m.name]} alt={m.name} className="h-6 w-6 dark:brightness-200" loading="lazy" />
+              ) : (
+                <div className="flex h-6 w-6 items-center justify-center rounded bg-[#F5F3FF] text-xs font-bold text-[#4F46E5] dark:bg-indigo-950 dark:text-indigo-300">{m.name.slice(0, 1)}</div>
+              )}
+              <span className="rounded bg-[#FAFAFA] px-2 py-0.5 text-[10px] font-semibold text-[#64748B] dark:bg-slate-700">{m.provider}</span>
             </div>
-            <code className="mt-2 inline-block rounded bg-slate-100 px-1.5 py-0.5 font-mono text-[10px] text-slate-600 dark:bg-slate-800 dark:text-slate-300">{m.id}</code>
-            <div className="mt-3 text-xs text-slate-500">
-              <p>Input: <strong className="text-slate-700 dark:text-slate-200">${m.input_price_per_1m}/1M token</strong></p>
-              <p>Output: <strong className="text-slate-700 dark:text-slate-200">${m.output_price_per_1m}/1M token</strong></p>
+            <h3 className="text-sm font-bold text-[#0F172A] dark:text-white">{m.name}</h3>
+            <code className="mt-1 block truncate rounded bg-[#FAFAFA] px-1.5 py-0.5 text-[10px] text-[#64748B] dark:bg-slate-800 dark:text-slate-400">{m.id}</code>
+            <div className="mt-2 text-[11px] text-[#64748B]">
+              <p>Input: <span className="font-semibold text-[#0F172A] dark:text-white">${m.input_price_per_1m}/1M</span></p>
+              <p>Output: <span className="font-semibold text-[#0F172A] dark:text-white">${m.output_price_per_1m}/1M</span></p>
             </div>
-            <button onClick={() => test(m)} className="mt-4 w-full rounded-xl gradient-bg py-2 text-xs font-semibold text-white transition hover:opacity-90">
-              Tes Langsung
-            </button>
+            <button onClick={() => test(m)}
+              className="btn-primary mt-3 w-full !py-2 text-xs">Tes Langsung</button>
           </div>
         ))}
       </div>
 
       {/* Response */}
-      <textarea value={resp} readOnly rows={6} placeholder="Respons API akan muncul di sini..."
-        className="mt-6 w-full rounded-2xl border border-slate-300 bg-slate-950 p-4 font-mono text-xs text-emerald-300 focus:outline-none dark:border-slate-700" />
+      <textarea value={resp} readOnly rows={5}
+        placeholder="Respons API akan muncul di sini..."
+        className="mt-6 w-full rounded-xl border border-[#E2E8F0] bg-[#0F172A] p-4 font-mono text-xs text-emerald-400 focus:outline-none dark:border-slate-700" />
 
-      {/* Docs singkat */}
-      <div className="mt-10 rounded-2xl border border-slate-200 p-6 dark:border-slate-800">
-        <h2 className="text-lg font-bold">Cara Pakai</h2>
-        <div className="mt-4 space-y-3 text-sm">
+      {/* Docs */}
+      <div className="card mt-10 p-6">
+        <h2 className="text-lg font-bold text-[#0F172A] dark:text-white">Cara Pakai</h2>
+        <div className="mt-4 space-y-4 text-sm">
           <div>
-            <h4 className="font-semibold">1. Base URL (OpenAI-compatible)</h4>
-            <code className="mt-1 block rounded bg-slate-100 px-3 py-2 font-mono text-xs dark:bg-slate-800">http://localhost:3000/api/v1</code>
+            <h4 className="font-semibold text-[#0F172A] dark:text-slate-200">1. Base URL</h4>
+            <code className="mt-1 block rounded-lg bg-[#FAFAFA] px-3 py-2 font-mono text-xs text-[#475569] dark:bg-slate-800">http://localhost:3000/api/v1</code>
           </div>
           <div>
-            <h4 className="font-semibold">2. Endpoint</h4>
-            <code className="mt-1 block rounded bg-slate-100 px-3 py-2 font-mono text-xs dark:bg-slate-800">POST /api/v1/chat/completions (OpenAI) · /api/v1/messages (Anthropic)</code>
+            <h4 className="font-semibold text-[#0F172A] dark:text-slate-200">2. Endpoint</h4>
+            <code className="mt-1 block rounded-lg bg-[#FAFAFA] px-3 py-2 font-mono text-xs text-[#475569] dark:bg-slate-800">
+POST /api/v1/chat/completions (OpenAI) · /api/v1/messages (Anthropic)
+            </code>
           </div>
           <div>
-            <h4 className="font-semibold">3. Header</h4>
-            <code className="mt-1 block rounded bg-slate-100 px-3 py-2 font-mono text-xs dark:bg-slate-800">Authorization: Bearer gk-...</code>
+            <h4 className="font-semibold text-[#0F172A] dark:text-slate-200">3. Header</h4>
+            <code className="mt-1 block rounded-lg bg-[#FAFAFA] px-3 py-2 font-mono text-xs text-[#475569] dark:bg-slate-800">Authorization: Bearer gk-...</code>
           </div>
           <div>
-            <h4 className="font-semibold">4. Contoh (curl)</h4>
-            <pre className="overflow-x-auto rounded bg-slate-950 p-3 text-xs text-emerald-300">{`curl http://localhost:3000/api/v1/chat/completions \\
+            <h4 className="font-semibold text-[#0F172A] dark:text-slate-200">4. Contoh (curl)</h4>
+            <pre className="overflow-x-auto rounded-lg bg-[#0F172A] p-3 text-xs text-emerald-400">{`curl http://localhost:3000/api/v1/chat/completions \\
   -H "Content-Type: application/json" \\
-  -H "Authorization: Bearer gk-demo-...03e" \\
+  -H "Authorization: Bearer gk-..." \\
   -d '{"model":"gk/claude-sonnet-5","messages":[{"role":"user","content":"Halo"}]}'`}</pre>
           </div>
         </div>
       </div>
 
       <div className="mt-8 text-center">
-        <Link href="/products?type=ai" className="inline-block rounded-xl gradient-bg px-8 py-3 text-sm font-semibold text-white shadow-lg hover:opacity-90">
+        <Link href="/products?type=ai" className="btn-primary shadow-[0_4px_14px_rgb(79_70_229/0.4)]">
           Beli API Key
         </Link>
       </div>

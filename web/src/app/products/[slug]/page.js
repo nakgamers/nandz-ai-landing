@@ -6,6 +6,29 @@ import Link from "next/link";
 const formatRp = (n) =>
   new Intl.NumberFormat("id-ID", { style: "currency", currency: "IDR", maximumFractionDigits: 0 }).format(n);
 
+const brandLogo = {
+  "mobile-legends": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/mobilelegends.svg",
+  "free-fire": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/garena.svg",
+  "spotify-premium": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/spotify.svg",
+  "chatgpt-plus": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/openai.svg",
+  "netflix-premium": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/netflix.svg",
+  "capcut-pro": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/capcut.svg",
+  "youtube-premium": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/youtube.svg",
+  "canva-pro": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/canva.svg",
+  "disney-hotstar": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/disneyplus.svg",
+  "vidio-platinum": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/vidio.svg",
+  "genshin-impact": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/genshinimpact.svg",
+  "pubg-mobile": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/pubg.svg",
+  "valorant": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/valorant.svg",
+  "pulsa-telkomsel": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/telkomsel.svg",
+  "pulsa-xl": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/xlaxiata.svg",
+  "pulsa-axis": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/axis.svg",
+  "data-telkomsel": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/telkomsel.svg",
+  "token-pln": "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/pln.svg",
+  "ai-api-deepseek": "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/deepseek-color.svg",
+  "ai-api-qwen": "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/qwen-color.svg",
+};
+
 export default function ProductDetailPage({ params }) {
   const { slug } = use(params);
   const [product, setProduct] = useState(null);
@@ -58,9 +81,6 @@ export default function ProductDetailPage({ params }) {
     }
   };
 
-  const imageGradient = ["from-[#F5F3FF] to-[#EDE9FE]", "from-[#FFF7ED] to-[#FFEDD5]", "from-[#ECFDF5] to-[#D1FAE5]", "from-[#FEF2F2] to-[#FEE2E2]"];
-  const grad = imageGradient[product.id % imageGradient.length];
-
   if (orderResult) {
     return (
       <main className="mx-auto max-w-lg px-4 py-16 text-center">
@@ -82,7 +102,7 @@ export default function ProductDetailPage({ params }) {
         </div>
         <div className="mt-6 rounded-2xl border border-dashed border-[#E0E7FF] bg-[#F5F3FF] p-5 dark:border-indigo-800 dark:bg-indigo-950">
           <p className="text-sm font-semibold text-[#4F46E5]">🔍 Simulasi Pembayaran</p>
-          <p className="mt-1 text-xs text-[#818CF8]">Klik tombol di bawah untuk simulasi bayar (mock)</p>
+          <p className="mt-1 text-xs text-[#818CF8]">Klik untuk simulasi bayar (mock)</p>
           <button
             onClick={async () => {
               await fetch("/api/payments/mock-callback", {
@@ -97,14 +117,13 @@ export default function ProductDetailPage({ params }) {
             Simulasi Bayar
           </button>
         </div>
-        <Link href="/" className="mt-6 inline-block text-sm text-[#4F46E5] hover:underline">← Kembali ke Beranda</Link>
+        <Link href="/" className="mt-6 inline-block text-sm text-[#4F46E5] hover:underline">← Kembali</Link>
       </main>
     );
   }
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
-      {/* Breadcrumb */}
       <nav className="mb-8 text-sm text-[#64748B]">
         <Link href="/" className="hover:text-[#4F46E5]">Beranda</Link>
         <span className="mx-2">/</span>
@@ -114,12 +133,17 @@ export default function ProductDetailPage({ params }) {
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-5">
-        {/* Kiri: info */}
         <div className="lg:col-span-3">
-          <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${grad} text-2xl font-bold text-[#4F46E5]`}>
-            {product.name.slice(0, 1)}
+          <div className="mb-4 flex items-center gap-3">
+            {brandLogo[product.slug] ? (
+              <img src={brandLogo[product.slug]} alt="" className="h-10 w-10 rounded-lg object-contain p-0.5 dark:brightness-200 dark:invert" />
+            ) : (
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-[#F5F3FF] to-[#EDE9FE] text-lg font-bold text-[#4F46E5] dark:from-indigo-950 dark:to-indigo-800">
+                {product.name.slice(0, 1)}
+              </div>
+            )}
           </div>
-          <h1 className="mt-4 text-3xl font-bold text-[#0F172A] dark:text-white">{product.name}</h1>
+          <h1 className="text-3xl font-bold text-[#0F172A] dark:text-white">{product.name}</h1>
           <p className="mt-1 text-sm text-[#64748B]">{product.brand}</p>
           <p className="mt-3 leading-relaxed text-[#475569] dark:text-slate-300">{product.description}</p>
           {product.warranty_days > 0 && (
@@ -129,10 +153,9 @@ export default function ProductDetailPage({ params }) {
           )}
         </div>
 
-        {/* Kanan: beli */}
         <div className="lg:col-span-2">
           <div className="card p-6">
-            <h3 className="text-sm font-semibold text-[#0F172A] dark:text-white">Pilih Varian</h3>
+            <h3 className="text-sm font-bold text-[#0F172A] dark:text-white">Pilih Varian</h3>
             <div className="mt-3 max-h-72 space-y-1 overflow-y-auto">
               {product.variants.map((v) => (
                 <button
