@@ -1,0 +1,13 @@
+# Go
+server/data.db
+server/server.exe
+server/*.exe
+
+# Node
+web/node_modules/
+web/.next/
+web/out/
+
+# Env
+.env
+.env.local
