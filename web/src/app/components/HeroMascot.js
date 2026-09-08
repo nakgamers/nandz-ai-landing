@@ -20,7 +20,7 @@ export default function HeroMascot() {
         exposure="1.1"
         style={{ width: "100%", height: "100%", background: "transparent", "--poster-color": "transparent" }}
       ></model-viewer>
-      <span className="pointer-events-none absolute bottom-1 text-[11px] font-medium text-[#64748B] dark:text-slate-500">
+      <span className="pointer-events-none absolute bottom-1 text-[11px] font-medium text-[#64748B] dark:text-slate-400">
         ✋ seret untuk memutar
       </span>
     </div>

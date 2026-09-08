@@ -81,7 +81,7 @@ export default async function Home() {
                 AI API untuk Developer
               </Link>
             </div>
-            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium text-[#475569] dark:text-slate-400">
+            <div className="mt-8 flex flex-wrap gap-x-8 gap-y-2 text-sm font-medium text-[#475569] dark:text-slate-300">
               <span>⚡ {products.reduce((a, p) => a + p.variants.length, 0)}+ paket tersedia</span>
               <span>🕐 Transaksi otomatis 24 jam</span>
               <span>🛡️ Garansi 100% uang kembali</span>

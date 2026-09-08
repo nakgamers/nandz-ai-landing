@@ -28,14 +28,14 @@ export default function Navbar() {
               N
             </span>
             <span className="text-lg font-bold tracking-tight text-[#0F172A] dark:text-slate-100">
-              Nandz<span className="text-[#4F46E5]">Store</span>
+              Nandz<span className="text-[#4F46E5] dark:text-indigo-300">Store</span>
             </span>
           </Link>
           <nav className="flex items-center gap-0.5 text-sm font-medium text-[#334155] dark:text-slate-300">
-            <Link href="/" className="rounded-lg px-3 py-2 transition-colors hover:bg-[#F5F3FF] hover:text-[#4F46E5] dark:hover:bg-slate-800">Beranda</Link>
-            <Link href="/products" className="rounded-lg px-3 py-2 transition-colors hover:bg-[#F5F3FF] hover:text-[#4F46E5] dark:hover:bg-slate-800">Produk</Link>
+            <Link href="/" className="rounded-lg px-3 py-2 text-[#475569] transition-colors hover:bg-[#F5F3FF] hover:text-[#4F46E5] dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-indigo-300">Beranda</Link>
+            <Link href="/products" className="rounded-lg px-3 py-2 text-[#475569] transition-colors hover:bg-[#F5F3FF] hover:text-[#4F46E5] dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-indigo-300">Produk</Link>
             <Link href="/ai-api" className="rounded-lg px-3 py-2 text-[#4F46E5] transition-colors hover:bg-[#F5F3FF] dark:text-indigo-300">AI API</Link>
-            <Link href="/cek-invoice" className="rounded-lg px-3 py-2 transition-colors hover:bg-[#F5F3FF] hover:text-[#4F46E5] dark:hover:bg-slate-800">Cek Invoice</Link>
+            <Link href="/cek-invoice" className="rounded-lg px-3 py-2 text-[#475569] transition-colors hover:bg-[#F5F3FF] hover:text-[#4F46E5] dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-indigo-300">Cek Invoice</Link>
             {user && (
               <Link href="/admin" className="ml-1 rounded-lg border border-[#E0E7FF] px-3 py-1.5 text-[#4F46E5] transition-colors hover:bg-[#F5F3FF] dark:border-indigo-800 dark:text-indigo-300">
                 Admin
