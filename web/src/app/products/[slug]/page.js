@@ -15,7 +15,6 @@ export default function ProductDetailPage({ params }) {
   const [orderResult, setOrderResult] = useState(null);
   const [orderError, setOrderError] = useState("");
 
-  // Fetch product on mount
   useEffect(() => {
     fetch(`/api/products/${slug}`)
       .then((r) => (r.ok ? r.json() : null))
@@ -27,31 +26,29 @@ export default function ProductDetailPage({ params }) {
       .catch(() => setLoading(false));
   }, [slug]);
 
-  if (loading) return <div className="mx-auto max-w-4xl px-4 py-20 text-center text-slate-400">Memuat...</div>;
-  if (!product) return <div className="mx-auto max-w-4xl px-4 py-20 text-center"><h1 className="text-2xl font-bold">Produk tidak ditemukan</h1><Link href="/products" className="mt-4 inline-block text-indigo-600">← Kembali</Link></div>;
+  if (loading) return <div className="mx-auto max-w-4xl px-4 py-24 text-center text-[#94A3B8]">Memuat...</div>;
+  if (!product) return (
+    <div className="mx-auto max-w-4xl px-4 py-24 text-center">
+      <div className="mb-4 text-4xl">😕</div>
+      <h1 className="text-2xl font-bold text-[#0F172A] dark:text-white">Produk tidak ditemukan</h1>
+      <Link href="/products" className="mt-4 inline-block text-sm font-semibold text-[#4F46E5] hover:underline">← Kembali ke Produk</Link>
+    </div>
+  );
 
   const handleOrder = async () => {
     setOrderError("");
-    // Validate input
     for (const f of product.input_fields) {
       if (f.required && !inputValues[f.key]) {
         setOrderError(`Mohon isi ${f.label}`);
         return;
       }
     }
-    if (!selected) {
-      setOrderError("Pilih varian terlebih dahulu");
-      return;
-    }
+    if (!selected) { setOrderError("Pilih varian terlebih dahulu"); return; }
     try {
       const res = await fetch("/api/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          variant_id: selected.id,
-          input: inputValues,
-          method: "qris",
-        }),
+        body: JSON.stringify({ variant_id: selected.id, input: inputValues, method: "qris" }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Gagal");
@@ -61,21 +58,31 @@ export default function ProductDetailPage({ params }) {
     }
   };
 
+  const imageGradient = ["from-[#F5F3FF] to-[#EDE9FE]", "from-[#FFF7ED] to-[#FFEDD5]", "from-[#ECFDF5] to-[#D1FAE5]", "from-[#FEF2F2] to-[#FEE2E2]"];
+  const grad = imageGradient[product.id % imageGradient.length];
+
   if (orderResult) {
     return (
-      <main className="mx-auto max-w-lg px-4 py-20 text-center">
+      <main className="mx-auto max-w-lg px-4 py-16 text-center">
         <div className="mb-4 text-5xl">✅</div>
-        <h1 className="text-2xl font-bold">Pesanan Dibuat!</h1>
-        <p className="mt-2 text-slate-500">Invoice: {orderResult.order.invoice}</p>
-        <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-6 text-left dark:border-slate-800 dark:bg-slate-900">
-          <div className="flex justify-between"><span className="text-slate-500">Produk</span><span className="font-semibold">{orderResult.order.product_name}</span></div>
-          <div className="mt-2 flex justify-between"><span className="text-slate-500">Total</span><span className="font-bold text-indigo-600">{formatRp(orderResult.order.amount)}</span></div>
-          <div className="mt-2 flex justify-between"><span className="text-slate-500">Metode</span><span className="font-semibold capitalize">{orderResult.payment.method}</span></div>
-          <div className="mt-2 flex justify-between"><span className="text-slate-500">VA</span><span className="font-mono text-sm">{orderResult.payment.va_number}</span></div>
+        <h1 className="text-2xl font-bold text-[#0F172A] dark:text-white">Pesanan Dibuat!</h1>
+        <p className="mt-2 text-[#475569]">Invoice: <span className="font-mono font-semibold text-[#4F46E5]">{orderResult.order.invoice}</span></p>
+        <div className="card mt-6 p-6 text-left">
+          <div className="space-y-3 text-sm">
+            {[
+              ["Produk", orderResult.order.product_name],
+              ["Varian", orderResult.order.variant_name],
+              ["Total", formatRp(orderResult.order.amount)],
+              ["Metode", orderResult.payment.method?.toUpperCase()],
+              ["VA Number", orderResult.payment.va_number],
+            ].map(([k, v]) => (
+              <div key={k} className="flex justify-between"><span className="text-[#64748B]">{k}</span><span className="font-semibold text-[#0F172A] dark:text-white">{v}</span></div>
+            ))}
+          </div>
         </div>
-        <div className="mt-6 rounded-2xl border border-dashed border-indigo-300 bg-indigo-50 p-4 dark:border-indigo-700 dark:bg-indigo-950">
-          <p className="text-sm font-medium text-indigo-700 dark:text-indigo-300">🔍 QR Code (Mock)</p>
-          <p className="mt-1 text-xs text-indigo-500">Scan untuk bayar — atau klik callback simulasi:</p>
+        <div className="mt-6 rounded-2xl border border-dashed border-[#E0E7FF] bg-[#F5F3FF] p-5 dark:border-indigo-800 dark:bg-indigo-950">
+          <p className="text-sm font-semibold text-[#4F46E5]">🔍 Simulasi Pembayaran</p>
+          <p className="mt-1 text-xs text-[#818CF8]">Klik tombol di bawah untuk simulasi bayar (mock)</p>
           <button
             onClick={async () => {
               await fetch("/api/payments/mock-callback", {
@@ -83,56 +90,58 @@ export default function ProductDetailPage({ params }) {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ payment_id: orderResult.payment.id }),
               });
-              alert("✅ Pembayaran sukses (mock)! Order akan diproses.");
+              alert("✅ Pembayaran sukses! Order sedang diproses.");
             }}
-            className="mt-3 rounded-xl gradient-bg px-6 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+            className="btn-primary mt-4 w-full"
           >
             Simulasi Bayar
           </button>
         </div>
-        <Link href="/" className="mt-6 inline-block text-sm text-indigo-600">← Kembali ke Beranda</Link>
+        <Link href="/" className="mt-6 inline-block text-sm text-[#4F46E5] hover:underline">← Kembali ke Beranda</Link>
       </main>
     );
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-10">
+    <main className="mx-auto max-w-6xl px-4 py-10">
       {/* Breadcrumb */}
-      <nav className="mb-6 text-xs text-slate-400">
-        <Link href="/" className="hover:text-indigo-500">Beranda</Link>
-        <span className="mx-1">/</span>
-        <Link href="/products" className="hover:text-indigo-500">Produk</Link>
-        <span className="mx-1">/</span>
-        <span className="text-slate-600 dark:text-slate-300">{product.name}</span>
+      <nav className="mb-8 text-sm text-[#64748B]">
+        <Link href="/" className="hover:text-[#4F46E5]">Beranda</Link>
+        <span className="mx-2">/</span>
+        <Link href="/products" className="hover:text-[#4F46E5]">Produk</Link>
+        <span className="mx-2">/</span>
+        <span className="font-semibold text-[#0F172A] dark:text-white">{product.name}</span>
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-5">
-        {/* Kiri: info produk */}
+        {/* Kiri: info */}
         <div className="lg:col-span-3">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-50 text-2xl font-bold text-indigo-600 dark:bg-indigo-950 dark:text-indigo-300">
+          <div className={`flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${grad} text-2xl font-bold text-[#4F46E5]`}>
             {product.name.slice(0, 1)}
           </div>
-          <h1 className="mt-4 text-3xl font-bold">{product.name}</h1>
-          <p className="mt-1 text-sm text-slate-500">{product.brand}</p>
-          <p className="mt-3 text-slate-600 dark:text-slate-300">{product.description}</p>
+          <h1 className="mt-4 text-3xl font-bold text-[#0F172A] dark:text-white">{product.name}</h1>
+          <p className="mt-1 text-sm text-[#64748B]">{product.brand}</p>
+          <p className="mt-3 leading-relaxed text-[#475569] dark:text-slate-300">{product.description}</p>
           {product.warranty_days > 0 && (
-            <p className="mt-3 text-sm text-emerald-600">🛡️ Garansi {product.warranty_days} hari</p>
+            <div className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-[#ECFDF5] px-3 py-1.5 text-sm font-medium text-[#059669]">
+              <span>🛡️</span> Garansi {product.warranty_days} hari
+            </div>
           )}
         </div>
 
-        {/* Kanan: pemilihan varian + input */}
+        {/* Kanan: beli */}
         <div className="lg:col-span-2">
-          <div className="rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
-            <h3 className="font-semibold">Pilih Varian</h3>
-            <div className="mt-3 max-h-64 space-y-1 overflow-y-auto">
+          <div className="card p-6">
+            <h3 className="text-sm font-semibold text-[#0F172A] dark:text-white">Pilih Varian</h3>
+            <div className="mt-3 max-h-72 space-y-1 overflow-y-auto">
               {product.variants.map((v) => (
                 <button
                   key={v.id}
                   onClick={() => setSelected(v)}
-                  className={`flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-left text-sm transition ${
+                  className={`flex w-full items-center justify-between rounded-xl px-3.5 py-3 text-left text-sm transition-all ${
                     selected?.id === v.id
-                      ? "bg-indigo-50 text-indigo-700 ring-2 ring-indigo-400 dark:bg-indigo-950 dark:text-indigo-300"
-                      : "hover:bg-slate-50 dark:hover:bg-slate-800"
+                      ? "bg-gradient-to-r from-[#F5F3FF] to-[#EDE9FE] text-[#4F46E5] ring-2 ring-[#6366F1] dark:from-indigo-950 dark:to-indigo-900 dark:text-indigo-300"
+                      : "hover:bg-[#FAFAFA] dark:hover:bg-slate-800"
                   }`}
                 >
                   <span className="font-medium">{v.name}</span>
@@ -141,19 +150,18 @@ export default function ProductDetailPage({ params }) {
               ))}
             </div>
 
-            {/* Input fields */}
             {product.input_fields.length > 0 && (
-              <div className="mt-4 space-y-3">
+              <div className="mt-5 space-y-3">
                 {product.input_fields.map((f) => (
                   <div key={f.key}>
-                    <label className="mb-1 block text-xs font-medium text-slate-600 dark:text-slate-400">{f.label}</label>
+                    <label className="mb-1.5 block text-xs font-semibold text-[#334155] dark:text-slate-300">{f.label}</label>
                     <input
                       type={f.type}
                       placeholder={f.placeholder}
                       pattern={f.pattern}
                       value={inputValues[f.key] || ""}
                       onChange={(e) => setInputValues({ ...inputValues, [f.key]: e.target.value })}
-                      className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2 text-sm placeholder-slate-400 focus:border-indigo-400 focus:outline-none focus:ring-1 focus:ring-indigo-400 dark:border-slate-600 dark:bg-slate-800 dark:focus:border-indigo-500"
+                      className="input"
                     />
                   </div>
                 ))}
@@ -162,7 +170,7 @@ export default function ProductDetailPage({ params }) {
 
             {orderError && <p className="mt-3 text-sm text-red-500">{orderError}</p>}
 
-            <button onClick={handleOrder} className="mt-5 w-full rounded-xl gradient-bg py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90">
+            <button onClick={handleOrder} className="btn-primary mt-5 w-full text-sm">
               Beli Sekarang — {selected ? formatRp(selected.sell_price) : "—"}
             </button>
           </div>
