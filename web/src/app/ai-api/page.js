@@ -5,7 +5,7 @@ import Link from "next/link";
 
 const aiLogos = {
   Claude: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/claude-color.svg",
-  GPT: "https://cdn.jsdelivr.net/npm/simple-icons@v13/icons/openai.svg",
+  GPT: "/products/chatgpt-plus.png",
   DeepSeek: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/deepseek-color.svg",
   Qwen: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/qwen-color.svg",
   GLM: "https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg/icons/chatglm-color.svg",
@@ -73,7 +73,7 @@ export default function AiApiPage() {
             {copied ? "✓ Tersalin" : "Salin"}
           </button>
         </div>
-        <p className="mt-2 text-xs text-[#64748B]">Key dengan saldo Rp 100.000 untuk demo. Key asli setelah pembelian.</p>
+        <p className="mt-2 text-xs text-[#64748B] dark:text-slate-400">Key dengan saldo Rp 100.000 untuk demo. Key asli setelah pembelian.</p>
       </div>
 
       {/* Model grid */}
@@ -82,17 +82,17 @@ export default function AiApiPage() {
           <div key={m.id} className="card p-4">
             <div className="mb-2 flex items-center justify-between">
               {aiLogos[m.name] ? (
-                <img src={aiLogos[m.name]} alt={m.name} className="h-6 w-6 dark:brightness-200" loading="lazy" />
+                <img src={aiLogos[m.name]} alt={m.name} className="h-7 w-7 rounded object-contain" loading="lazy" />
               ) : (
                 <div className="flex h-6 w-6 items-center justify-center rounded bg-[#F5F3FF] text-xs font-bold text-[#4F46E5] dark:bg-indigo-950 dark:text-indigo-300">{m.name.slice(0, 1)}</div>
               )}
-              <span className="rounded bg-[#FAFAFA] px-2 py-0.5 text-[10px] font-semibold text-[#64748B] dark:bg-slate-700">{m.provider}</span>
+              <span className="rounded bg-[#F1F5F9] px-2 py-0.5 text-[10px] font-semibold text-[#475569] dark:bg-slate-700 dark:text-slate-300">{m.provider}</span>
             </div>
-            <h3 className="text-sm font-bold text-[#0F172A] dark:text-white">{m.name}</h3>
+            <h3 className="text-sm font-bold text-[#0F172A] dark:text-slate-50">{m.name}</h3>
             <code className="mt-1 block truncate rounded bg-[#FAFAFA] px-1.5 py-0.5 text-[10px] text-[#64748B] dark:bg-slate-800 dark:text-slate-400">{m.id}</code>
-            <div className="mt-2 text-[11px] text-[#64748B]">
-              <p>Input: <span className="font-semibold text-[#0F172A] dark:text-white">${m.input_price_per_1m}/1M</span></p>
-              <p>Output: <span className="font-semibold text-[#0F172A] dark:text-white">${m.output_price_per_1m}/1M</span></p>
+            <div className="mt-2 text-[11px] text-[#64748B] dark:text-slate-400">
+              <p>Input: <span className="font-semibold text-[#0F172A] dark:text-slate-100">${m.input_price_per_1m}/1M</span></p>
+              <p>Output: <span className="font-semibold text-[#0F172A] dark:text-slate-100">${m.output_price_per_1m}/1M</span></p>
             </div>
             <button onClick={() => test(m)}
               className="btn-primary mt-3 w-full !py-2 text-xs">Tes Langsung</button>

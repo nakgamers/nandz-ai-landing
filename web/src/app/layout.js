@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 import Navbar from "./components/Navbar";
 import "./globals.css";
 
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
         <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet" />
       </head>
       <body className="min-h-screen bg-white font-sans antialiased dark:bg-[#0b1120]">
+        <Script src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js" strategy="lazyOnload" type="module" />
         <Navbar />
 
         {children}
