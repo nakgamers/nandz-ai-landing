@@ -97,6 +97,35 @@ type AIModel struct {
 	Name        string  `json:"name"`
 	InputPrice  float64 `json:"input_price_per_1m"`  // harga jual per 1M token
 	OutputPrice float64 `json:"output_price_per_1m"`
-	CostIn      float64 `json:"-"` // cost internal
+	CostIn      float64 `json:"-"`
 	CostOut     float64 `json:"-"`
+}
+
+// AdminVariant — Variant tapi cost_price di-serialize (khusus admin).
+type AdminVariant struct {
+	ID           int64   `json:"id"`
+	ProductID    int64   `json:"product_id"`
+	Name         string  `json:"name"`
+	SKU          string  `json:"sku"`
+	SellPrice    float64 `json:"sell_price"`
+	PromoPrice   float64 `json:"promo_price,omitempty"`
+	DisplayPrice float64 `json:"display_price,omitempty"`
+	CostPrice    float64 `json:"cost_price"`
+	Stock        int     `json:"stock"`
+	Region       string  `json:"region,omitempty"`
+	Subcategory  string  `json:"subcategory,omitempty"`
+	Status       string  `json:"status"`
+}
+
+// AdminProduct — produk dengan varian lengkap (termasuk cost_price).
+type AdminProduct struct {
+	ID           int64          `json:"id"`
+	Slug         string         `json:"slug"`
+	Name         string         `json:"name"`
+	Category     string         `json:"category"`
+	Brand        string         `json:"brand"`
+	Image        string         `json:"image"`
+	Description  string         `json:"description"`
+	WarrantyDays int            `json:"warranty_days"`
+	Variants     []AdminVariant `json:"variants,omitempty"`
 }

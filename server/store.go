@@ -185,6 +185,32 @@ func (s *Store) seed() error {
 			},
 		},
 		{
+			slug: "free-fire", name: "Free Fire", cat: "game_topup", brand: "Garena",
+			desc: "Top up Free Fire diamonds murah & instan", warranty: 0,
+			fields: []InputField{
+				{Key: "userId", Type: "number", Label: "User ID", Placeholder: "Masukkan User ID FF", Pattern: `^\d{5,12}$`, Required: true},
+			},
+			variants: []Variant{
+				{SKU: "ff70", Name: "70 Diamonds", SellPrice: 1800, DisplayPrice: 2500, CostPrice: 1400},
+				{SKU: "ff140", Name: "140 Diamonds", SellPrice: 3500, DisplayPrice: 4800, CostPrice: 2800},
+				{SKU: "ff355", Name: "355 Diamonds", SellPrice: 8700, DisplayPrice: 12000, CostPrice: 7100},
+				{SKU: "ff720", Name: "720 Diamonds", SellPrice: 17200, DisplayPrice: 24000, CostPrice: 14200},
+				{SKU: "ff1450", Name: "1450 Diamonds", SellPrice: 34000, DisplayPrice: 47000, CostPrice: 28500},
+			},
+		},
+		{
+			slug: "spotify-premium", name: "Spotify Premium", cat: "digital", brand: "Spotify",
+			desc: "Akun Spotify Premium — garansi masa aktif", warranty: 30,
+			fields: []InputField{
+				{Key: "email", Type: "email", Label: "Email", Placeholder: "email untuk kirim akun", Required: true},
+			},
+			variants: []Variant{
+				{SKU: "sp1m", Name: "1 Bulan (Sharing)", SellPrice: 15000, DisplayPrice: 49000, CostPrice: 9000, Stock: 10},
+				{SKU: "sp3m", Name: "3 Bulan (Sharing)", SellPrice: 42000, DisplayPrice: 120000, CostPrice: 26000, Stock: 5},
+				{SKU: "sp1m-individual", Name: "1 Bulan (Individual)", SellPrice: 45000, DisplayPrice: 69000, CostPrice: 30000, Stock: 3},
+			},
+		},
+		{
 			slug: "chatgpt-plus", name: "ChatGPT Plus", cat: "digital", brand: "OpenAI",
 			desc: "Akun ChatGPT Plus, garansi 7 hari", warranty: 7,
 			fields: []InputField{
@@ -195,12 +221,143 @@ func (s *Store) seed() error {
 			},
 		},
 		{
+			slug: "capcut-pro", name: "CapCut Pro", cat: "digital", brand: "ByteDance",
+			desc: "Akun CapCut Pro — garansi 7 hari", warranty: 7,
+			fields: []InputField{
+				{Key: "email", Type: "email", Label: "Email", Placeholder: "email untuk kirim akun", Required: true},
+			},
+			variants: []Variant{
+				{SKU: "cc1m", Name: "1 Bulan", SellPrice: 10000, DisplayPrice: 15000, CostPrice: 5000, Stock: 8},
+			},
+		},
+		{
+			slug: "youtube-premium", name: "YouTube Premium", cat: "digital", brand: "Google",
+			desc: "YouTube Premium tanpa iklan — garansi 30 hari", warranty: 30,
+			fields: []InputField{
+				{Key: "email", Type: "email", Label: "Email", Placeholder: "email untuk kirim akun", Required: true},
+			},
+			variants: []Variant{
+				{SKU: "yt1m", Name: "1 Bulan (Sharing)", SellPrice: 12000, DisplayPrice: 39000, CostPrice: 8000, Stock: 4},
+			},
+		},
+		{
+			slug: "canva-pro", name: "Canva Pro", cat: "digital", brand: "Canva",
+			desc: "Akun Canva Pro — garansi 7 hari", warranty: 7,
+			fields: []InputField{
+				{Key: "email", Type: "email", Label: "Email", Placeholder: "email untuk kirim akun", Required: true},
+			},
+			variants: []Variant{
+				{SKU: "cv1m", Name: "1 Bulan (Join Team)", SellPrice: 8000, DisplayPrice: 12000, CostPrice: 4000, Stock: 6},
+			},
+		},
+		{
+			slug: "disney-hotstar", name: "Disney+ Hotstar", cat: "digital", brand: "Disney",
+			desc: "Akun Disney+ Hotstar Premium", warranty: 30,
+			fields: []InputField{
+				{Key: "email", Type: "email", Label: "Email", Placeholder: "email untuk kirim akun", Required: true},
+			},
+			variants: []Variant{
+				{SKU: "dh1m", Name: "1 Bulan (Sharing)", SellPrice: 13000, DisplayPrice: 39000, CostPrice: 9000, Stock: 4},
+			},
+		},
+		{
+			slug: "vidio-platinum", name: "Vidio Platinum", cat: "digital", brand: "Vidio",
+			desc: "Akun Vidio Platinum", warranty: 30,
+			fields: []InputField{
+				{Key: "email", Type: "email", Label: "Email", Placeholder: "email untuk kirim akun", Required: true},
+			},
+			variants: []Variant{
+				{SKU: "vd1m", Name: "1 Bulan", SellPrice: 20000, DisplayPrice: 29000, CostPrice: 14000, Stock: 5},
+			},
+		},
+		{
+			slug: "genshin-impact", name: "Genshin Impact", cat: "game_topup", brand: "HoYoverse",
+			desc: "Top up Genesis Crystals Genshin Impact", warranty: 0,
+			fields: []InputField{
+				{Key: "uid", Type: "number", Label: "UID", Placeholder: "Masukkan UID", Pattern: `^\d{9}$`, Required: true},
+				{Key: "server", Type: "text", Label: "Server", Placeholder: "Contoh: Asia", Required: true},
+			},
+			variants: []Variant{
+				{SKU: "gi60", Name: "60 Genesis Crystals", SellPrice: 15000, DisplayPrice: 18000, CostPrice: 13200},
+				{SKU: "gi300", Name: "300 Genesis Crystals", SellPrice: 70000, DisplayPrice: 85000, CostPrice: 62000},
+				{SKU: "gi980", Name: "980 Genesis Crystals", SellPrice: 220000, DisplayPrice: 260000, CostPrice: 195000},
+			},
+		},
+		{
+			slug: "pubg-mobile", name: "PUBG Mobile", cat: "game_topup", brand: "Krafton",
+			desc: "Top up UC PUBG Mobile", warranty: 0,
+			fields: []InputField{
+				{Key: "userId", Type: "number", Label: "User ID", Placeholder: "Masukkan User ID", Pattern: `^\d{6,12}$`, Required: true},
+			},
+			variants: []Variant{
+				{SKU: "pubg60", Name: "60 UC", SellPrice: 13000, DisplayPrice: 16000, CostPrice: 11500},
+				{SKU: "pubg325", Name: "325 UC", SellPrice: 66000, DisplayPrice: 79000, CostPrice: 59000},
+				{SKU: "pubg660", Name: "660 UC", SellPrice: 130000, DisplayPrice: 155000, CostPrice: 116000},
+			},
+		},
+		{
+			slug: "valorant", name: "Valorant", cat: "game_topup", brand: "Riot",
+			desc: "Top up Valorant Points (VP)", warranty: 0,
+			fields: []InputField{
+				{Key: "riotId", Type: "text", Label: "Riot ID", Placeholder: "NAMA#TAG", Required: true},
+			},
+			variants: []Variant{
+				{SKU: "vp475", Name: "475 VP", SellPrice: 53000, DisplayPrice: 60000, CostPrice: 48000},
+				{SKU: "vp1000", Name: "1000 VP", SellPrice: 105000, DisplayPrice: 120000, CostPrice: 95000},
+			},
+		},
+		{
+			slug: "pulsa-xl", name: "Pulsa XL", cat: "ppob", brand: "XL Axiata",
+			desc: "Isi ulang pulsa XL", warranty: 0,
+			fields: []InputField{
+				{Key: "phone", Type: "tel", Label: "No. HP", Placeholder: "08xxxxxxxxxx", Pattern: `^08\d{8,11}$`, Required: true},
+			},
+			variants: []Variant{
+				{SKU: "xl5", Name: "Pulsa 5.000", SellPrice: 5250, DisplayPrice: 6000, CostPrice: 5080},
+				{SKU: "xl10", Name: "Pulsa 10.000", SellPrice: 10300, DisplayPrice: 11500, CostPrice: 10000},
+				{SKU: "xl25", Name: "Pulsa 25.000", SellPrice: 24500, DisplayPrice: 26000, CostPrice: 23900},
+				{SKU: "xl50", Name: "Pulsa 50.000", SellPrice: 48900, DisplayPrice: 52000, CostPrice: 47800},
+			},
+		},
+		{
+			slug: "pulsa-axis", name: "Pulsa AXIS", cat: "ppob", brand: "AXIS",
+			desc: "Isi ulang pulsa AXIS", warranty: 0,
+			fields: []InputField{
+				{Key: "phone", Type: "tel", Label: "No. HP", Placeholder: "08xxxxxxxxxx", Pattern: `^08\d{8,11}$`, Required: true},
+			},
+			variants: []Variant{
+				{SKU: "ax5", Name: "Pulsa 5.000", SellPrice: 5200, DisplayPrice: 6000, CostPrice: 5000},
+				{SKU: "ax10", Name: "Pulsa 10.000", SellPrice: 10150, DisplayPrice: 11000, CostPrice: 9800},
+				{SKU: "ax25", Name: "Pulsa 25.000", SellPrice: 24300, DisplayPrice: 26000, CostPrice: 23500},
+			},
+		},
+		{
+			slug: "data-telkomsel", name: "Paket Data Telkomsel", cat: "ppob", brand: "Telkomsel",
+			desc: "Paket internet Telkomsel", warranty: 0,
+			fields: []InputField{
+				{Key: "phone", Type: "tel", Label: "No. HP", Placeholder: "08xxxxxxxxxx", Pattern: `^08\d{8,11}$`, Required: true},
+			},
+			variants: []Variant{
+				{SKU: "dt1gb", Name: "1 GB (30 hari)", SellPrice: 15000, DisplayPrice: 17000, CostPrice: 14000},
+				{SKU: "dt3gb", Name: "3 GB (30 hari)", SellPrice: 30000, DisplayPrice: 35000, CostPrice: 28000},
+				{SKU: "dt5gb", Name: "5 GB (30 hari)", SellPrice: 48000, DisplayPrice: 55000, CostPrice: 45000},
+			},
+		},
+		{
 			slug: "ai-api-deepseek", name: "DeepSeek API (Bebas Token)", cat: "ai", brand: "DeepSeek",
 			desc: "Plan Bebas Token DeepSeek V4 — akses waktu, token tidak dibatasi", warranty: 7,
 			fields: []InputField{},
 			variants: []Variant{
 				{SKU: "ds7", Name: "DeepSeek Plan 7 Hari", SellPrice: 10000, DisplayPrice: 25000, CostPrice: 4000, Stock: 3},
 				{SKU: "ds30", Name: "DeepSeek Plan 30 Hari", SellPrice: 25000, DisplayPrice: 60000, CostPrice: 12000, Stock: 2},
+			},
+		},
+		{
+			slug: "ai-api-qwen", name: "Qwen API (Bebas Token)", cat: "ai", brand: "Alibaba",
+			desc: "Plan Bebas Token Qwen Max/Plus/Turbo — akses waktu", warranty: 7,
+			fields: []InputField{},
+			variants: []Variant{
+				{SKU: "qw7", Name: "Qwen Plan 7 Hari", SellPrice: 15000, DisplayPrice: 30000, CostPrice: 7000, Stock: 2},
 			},
 		},
 	}

@@ -1,37 +1,135 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
-  --primary: #6366f1;
-  --primary-dark: #4f46e5;
+  --primary: #533afd;
+  --primary-dark: #4434d4;
+  --primary-deep: #2e2b8c;
+  --brand-dark: #1c1e54;
+  --navy: #061b31;
+  --body: #64748d;
+  --label: #273951;
   --surface: #ffffff;
   --surface-alt: #f8fafc;
-  --text-primary: #0f172a;
-  --text-secondary: #64748b;
-  --border: #e2e8f0;
+  --border: #e5edf5;
+  --border-soft: #d6d9fc;
+  --ruby: #ea2261;
+  --magenta: #f96bee;
+  --success: #15be53;
+  --success-text: #108c3d;
+  --shadow-blue: rgba(50, 50, 93, 0.25);
+  --shadow-dark-blue: rgba(3, 3, 39, 0.25);
+  --shadow-black: rgba(0, 0, 0, 0.1);
 }
 
 .dark {
-  --surface: #0f172a;
-  --surface-alt: #1e293b;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --border: #334155;
+  --surface: #0b1120;
+  --surface-alt: #111a2e;
+  --navy: #f1f5f9;
+  --body: #94a3b8;
+  --label: #cbd5e1;
+  --border: #1e293b;
+  --border-soft: #312e81;
 }
 
 body {
   background: var(--surface);
-  color: var(--text-primary);
+  color: var(--body);
+  font-family: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-feature-settings: "ss01";
+}
+
+h1, h2, h3, h4, h5 {
+  color: var(--navy);
+  font-weight: 300; /* Stripe signature: light headlines */
+  letter-spacing: -0.02em;
 }
 
 .gradient-text {
-  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  background: linear-gradient(135deg, #533afd 0%, #f96bee 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
 .gradient-bg {
-  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  background: linear-gradient(135deg, #533afd 0%, #4434d4 100%);
 }
+
+.gradient-bg-hover:hover {
+  background: linear-gradient(135deg, #4434d4 0%, #2e2b8c 100%);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow-blue) 0px 30px 45px -30px, var(--shadow-black) 0px 18px 36px -18px;
+}
+
+.card-hover:hover {
+  box-shadow: var(--shadow-blue) 0px 40px 60px -40px, var(--shadow-black) 0px 24px 48px -24px;
+  transform: translateY(-2px);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 400;
+  transition: background 0.15s;
+}
+.btn-primary:hover { background: var(--primary-dark); }
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--primary);
+  padding: 0.625rem 1.25rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-soft);
+  font-weight: 400;
+  transition: background 0.15s;
+}
+.btn-ghost:hover { background: rgba(83, 58, 253, 0.05); }
+
+.input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--navy);
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(83, 58, 253, 0.15);
+}
+.input::placeholder { color: var(--body); }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.125rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.6875rem;
+  font-weight: 300;
+  border: 1px solid transparent;
+}
+
+.shadow-brand {
+  box-shadow: var(--shadow-blue) 0px 30px 45px -30px, var(--shadow-black) 0px 18px 36px -18px;
+}
+
+/* numerik finansial rapi */
+.tnum { font-variant-numeric: tabular-nums; }

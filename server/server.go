@@ -70,6 +70,13 @@ func (s *Server) Routes() http.Handler {
 	mux.HandleFunc("POST /api/v1/chat/completions", s.handleAIProxy)
 	mux.HandleFunc("POST /api/v1/messages", s.handleAIProxy)
 
+	// Admin (dilindungi X-Admin-Key)
+	mux.HandleFunc("GET /api/admin/products", s.adminOnly(s.handleAdminProducts))
+	mux.HandleFunc("POST /api/admin/products", s.adminOnly(s.handleAdminSaveProduct))
+	mux.HandleFunc("DELETE /api/admin/products/{id}", s.adminOnly(s.handleAdminDeleteProduct))
+	mux.HandleFunc("POST /api/admin/variants", s.adminOnly(s.handleAdminSaveVariant))
+	mux.HandleFunc("DELETE /api/admin/variants/{id}", s.adminOnly(s.handleAdminDeleteVariant))
+
 	// Frontend static & SPA fallback (paling akhir)
 	mux.HandleFunc("GET /", s.handleSPA)
 
