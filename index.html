@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nandz AI — API Key Qwen3.8-27B</title>
+<meta name="description" content="API key untuk Qwen3.8-27B-Turbo. Kompatibel OpenAI, context 256K, harga flat mingguan.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0d10; --surface:#111418; --surface2:#161a1f;
+    --border:#23282f; --border-soft:#1b2027;
+    --text:#e8eaed; --muted:#9aa0a8; --faint:#6b7280;
+    --accent:#34d399; --accent-dim:rgba(52,211,153,.12);
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+    --sans:'Inter',-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px}
+  /* nav */
+  nav{border-bottom:1px solid var(--border-soft);position:sticky;top:0;background:rgba(11,13,16,.88);backdrop-filter:blur(10px);z-index:50}
+  .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-family:var(--mono);font-weight:500;font-size:15px;letter-spacing:.02em}
+  .brand b{color:var(--accent);font-weight:500}
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--muted)}
+  .nav-links a:hover{color:var(--text)}
+  .nav-cta{display:flex;align-items:center;gap:16px}
+  .status{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px rgba(52,211,153,.7)}
+  .btn{display:inline-block;background:var(--accent);color:#06281c;font-weight:600;font-size:14px;padding:10px 20px;border-radius:8px;transition:transform .12s ease,opacity .12s}
+  .btn:hover{opacity:.92;transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
+  .btn-ghost:hover{border-color:var(--faint);opacity:1}
+  /* hero */
+  .hero{padding:96px 0 72px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
+  h1{font-size:clamp(34px,4.6vw,52px);line-height:1.12;letter-spacing:-.02em;font-weight:700;margin-bottom:20px}
+  .lede{color:var(--muted);font-size:17px;max-width:46ch;margin-bottom:32px}
+  .lede code{font-family:var(--mono);font-size:.88em;color:var(--text);background:var(--surface2);padding:2px 7px;border-radius:5px;border:1px solid var(--border-soft)}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+  /* terminal */
+  .term{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;font-family:var(--mono);font-size:13px}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--border-soft);color:var(--faint);font-size:12px}
+  .term-bar i{width:10px;height:10px;border-radius:50%;background:var(--border);display:inline-block}
+  .term-body{padding:20px;overflow-x:auto;line-height:1.75}
+  .c-k{color:#7dd3fc}.c-s{color:var(--accent)}.c-c{color:var(--faint)}.c-p{color:#e8eaed}
+  .copy-hint{color:var(--faint);font-size:11px;padding:0 20px 16px}
+  /* spec strip */
+  .specs{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:12px;margin-bottom:96px;overflow:hidden}
+  .spec{padding:24px;border-right:1px solid var(--border-soft)}
+  .spec:last-child{border-right:0}
+  .spec .k{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+  .spec .v{font-size:20px;font-weight:600;letter-spacing:-.01em}
+  .spec .d{font-size:13px;color:var(--muted);margin-top:4px}
+  /* sections */
+  section{padding-bottom:96px}
+  .sec-label{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:12px}
+  h2{font-size:clamp(24px,3vw,32px);letter-spacing:-.02em;font-weight:700;margin-bottom:14px}
+  .sec-sub{color:var(--muted);max-width:62ch;margin-bottom:40px}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;padding:28px}
+  .card h3{font-size:16px;font-weight:600;margin-bottom:10px}
+  .card p{font-size:14px;color:var(--muted)}
+  .card .tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:14px}
+  /* pricing */
+  .price-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:40px;max-width:520px}
+  .price-row{display:flex;align-items:baseline;gap:10px;margin:18px 0 6px}
+  .price{font-size:44px;font-weight:700;letter-spacing:-.03em}
+  .per{color:var(--muted);font-size:15px}
+  .feat{list-style:none;margin:24px 0 32px;font-size:14px;color:var(--muted)}
+  .feat li{padding:9px 0;border-bottom:1px solid var(--border-soft);display:flex;gap:12px;align-items:center}
+  .feat li:last-child{border-bottom:0}
+  .feat li::before{content:"—";color:var(--accent);font-family:var(--mono)}
+  .fine{font-size:12.5px;color:var(--faint);margin-top:18px}
+  /* steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;counter-reset:step}
+  .step{background:var(--surface);border:1px solid var(--border-soft);border-radius:12px;padding:28px;position:relative}
+  .step::before{counter-increment:step;content:"0" counter(step);font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em;display:block;margin-bottom:16px}
+  .step h3{font-size:16px;font-weight:600;margin-bottom:8px}
+  .step p{font-size:14px;color:var(--muted)}
+  /* faq */
+  details{background:var(--surface);border:1px solid var(--border-soft);border-radius:10px;margin-bottom:10px;overflow:hidden}
+  summary{padding:18px 22px;cursor:pointer;font-weight:500;font-size:15px;list-style:none;display:flex;justify-content:space-between;align-items:center}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";font-family:var(--mono);color:var(--accent);font-size:18px}
+  details[open] summary::after{content:"–"}
+  details p{padding:0 22px 20px;font-size:14px;color:var(--muted);max-width:70ch}
+  details p code{font-family:var(--mono);font-size:.88em;color:var(--text);background:var(--surface2);padding:2px 6px;border-radius:4px}
+  /* footer */
+  footer{border-top:1px solid var(--border-soft);padding:36px 0 48px}
+  .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--faint)}
+  .foot .mono{font-family:var(--mono);font-size:12px}
+  .claim-card{display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px 36px;flex-wrap:wrap}
+  .claim-bot{font-family:var(--mono);font-size:20px;font-weight:500;margin-bottom:10px}
+  .claim-bot::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-right:12px;box-shadow:0 0 8px rgba(52,211,153,.7)}
+  .claim-desc{font-size:14px;color:var(--muted);max-width:52ch}
+  .claim-desc code{font-family:var(--mono);font-size:.88em;color:var(--text);background:var(--surface2);padding:2px 7px;border-radius:5px;border:1px solid var(--border-soft)}
+  @media(max-width:860px){
+    .hero{grid-template-columns:1fr;padding:64px 0 56px}
+    .specs{grid-template-columns:repeat(2,1fr)}
+    .spec:nth-child(2){border-right:0}
+    .spec{border-bottom:1px solid var(--border-soft)}
+    .cards,.steps{grid-template-columns:1fr}
+    .nav-links{display:none}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#">NANDZ<b>·</b>AI</a>
+    <div class="nav-links">
+      <a href="#model">Model</a>
+      <a href="#gratis">Gratis</a>
+      <a href="#harga">Harga</a>
+      <a href="#order">Cara Order</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="nav-cta">
+      <span class="status"><span class="dot"></span>operational</span>
+      <a class="btn" href="#" id="cta-top">Beli API Key</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <div class="eyebrow">API Infrastructure — Indonesia</div>
+      <h1>API key AI.<br>Tanpa drama.</h1>
+      <p class="lede">Akses <code>Qwen3.8-27B-Turbo</code> lewat API yang kompatibel OpenAI. Context 256K, function calling jalan, harga flat mingguan — bayar, terima key, langsung pakai.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#" id="cta-hero">Beli API Key</a>
+        <a class="btn btn-ghost" href="#model">Lihat Spesifikasi</a>
+      </div>
+    </div>
+    <div class="term">
+      <div class="term-bar"><i></i><i></i><i></i><span>terminal</span></div>
+      <div class="term-body"><span class="c-c"># ganti $KEY dengan API key kamu</span><br><span class="c-k">curl</span> <span class="c-p">https://ai.nandzstore.com/v1/chat/completions</span> \<br>&nbsp;&nbsp;<span class="c-k">-H</span> <span class="c-s">"Content-Type: application/json"</span> \<br>&nbsp;&nbsp;<span class="c-k">-H</span> <span class="c-s">"Authorization: Bearer $KEY"</span> \<br>&nbsp;&nbsp;<span class="c-k">-d</span> <span class="c-s">'{"model": "qwen3-27b-turbo",<br>&nbsp;&nbsp;&nbsp;&nbsp;"messages": [{"role": "user",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"content": "Halo!"}]}'</span></div>
+      <div class="copy-hint">drop-in replacement untuk base URL OpenAI kamu</div>
+    </div>
+  </header>
+
+  <div class="specs" id="model">
+    <div class="spec"><div class="k">Model</div><div class="v">Qwen3.8-27B</div><div class="d">Turbo · uncensored</div></div>
+    <div class="spec"><div class="k">Context</div><div class="v">256K</div><div class="d">token per request</div></div>
+    <div class="spec"><div class="k">Interface</div><div class="v">OpenAI</div><div class="d">/v1 · function calling</div></div>
+    <div class="spec"><div class="k">Fair use</div><div class="v">120<span style="font-size:14px;color:var(--muted)">/min</span></div><div class="d">request per menit</div></div>
+  </div>
+
+  <section>
+    <div class="sec-label">Kenapa Nandz AI</div>
+    <h2>Dibangun buat dipakai, bukan buat demo.</h2>
+    <p class="sec-sub">Infrastruktur yang sama dipakai buat eksperimen internal kami. Kalau lemot atau mati, kami yang pertama kena — jadi kami pastiin jalan.</p>
+    <div class="cards">
+      <div class="card"><span class="tag">Kompatibel</span><h3>Drop-in ke kode kamu</h3><p>Endpoint <span style="font-family:var(--mono);font-size:.9em">/v1</span> ngikutin format OpenAI. Ganti base URL + key, kode kamu yang udah ada langsung jalan. Termasuk function calling buat agent.</p></div>
+      <div class="card"><span class="tag">Bebas</span><h3>Uncensored, beneran</h3><p>Model Turbo tanpa filter moral bawaan. Buat riset, coding, dan creative work yang butuh model yang nggak nolak-nolak.</p></div>
+      <div class="card"><span class="tag">Jujur</span><h3>Harga flat, tanpa limit harian</h3><p>Satu harga per minggu. Nggak ada tier-token yang bikin was-was tiap request. Fair-use cap-nya longgar dan nggak bakal kerasa buat pemakaian normal.</p></div>
+    </div>
+  </section>
+
+  <section id="gratis">
+    <div class="sec-label">Gratis</div>
+    <h2>Coba dulu, bayar nanti.</h2>
+    <p class="sec-sub">Masih ragu? Claim key bansos — gratis 24 jam buat ngetes. Limit 20 request/menit, cukup buat buktiin API-nya beneran jalan.</p>
+    <div class="claim-card">
+      <div>
+        <div class="claim-bot">@ainandzclaimbot</div>
+        <div class="claim-desc">Chat bot-nya, ketik <code>/claim</code>, key langsung dikirim ke kamu. Satu key per akun Telegram.</div>
+      </div>
+      <a class="btn" href="#" id="cta-claim">Claim Key Gratis</a>
+    </div>
+  </section>
+
+  <section id="harga">
+    <div class="sec-label">Harga</div>
+    <h2>Satu paket. Udah.</h2>
+    <p class="sec-sub">Nggak ada menu membingungkan. Satu harga, semua fitur kebuka.</p>
+    <div class="price-card">
+      <div class="sec-label" style="margin-bottom:0">Batch Percobaan</div>
+      <div class="price-row"><span class="price">Rp50rb</span><span class="per">/ minggu / API key</span></div>
+      <ul class="feat">
+        <li>Akses penuh Qwen3.8-27B-Turbo, context 256K</li>
+        <li>120 request/menit · 100rb token/menit · 5 paralel</li>
+        <li>Function calling untuk agent &amp; automation</li>
+        <li>API key dikirim otomatis setelah pembayaran</li>
+        <li>Garansi refund 100% kalau API nggak jalan</li>
+      </ul>
+      <a class="btn" href="#" id="cta-price" style="display:block;text-align:center">Beli Sekarang</a>
+      <p class="fine">Slot batch percobaan terbatas 50 key. Privasi kamu prioritas: kami nggak nyimpen isi prompt/response — cuma usage, error rate, dan latency.</p>
+    </div>
+  </section>
+
+  <section id="order">
+    <div class="sec-label">Cara Order</div>
+    <h2>Dari chat sampai key, hitungan menit.</h2>
+    <p class="sec-sub">Alur yang udah terbukti di store kami — otomatis, tanpa nunggu admin.</p>
+    <div class="steps">
+      <div class="step"><h3>Chat store kami</h3><p>Klik tombol beli — kamu diarahkan ke Telegram store. Pilih paket mingguan.</p></div>
+      <div class="step"><h3>Bayar</h3><p>Selesaikan pembayaran lewat payment gateway. Terkonfirmasi otomatis.</p></div>
+      <div class="step"><h3>Terima API key</h3><p>Key langsung dikirim ke kamu via Telegram. Paste ke kode, jalan.</p></div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="sec-label">FAQ</div>
+    <h2>Yang sering ditanya.</h2>
+    <div style="height:32px"></div>
+    <details open>
+      <summary>Apakah benar-benar tanpa limit harian?</summary>
+      <p>Ada fair-use cap (120 req/menit, 100rb token/menit) biar satu user nggak makan semua resource. Buat pemakaian manusia normal — coding, chat, agent — cap ini nggak bakal kerasa.</p>
+    </details>
+    <details>
+      <summary>Modelnya disensor atau tidak?</summary>
+      <p>Uncensored. Ini varian Turbo yang memang dirilis tanpa alignment filter bawaan.</p>
+    </details>
+    <details>
+      <summary>Bisa dipakai untuk apa saja?</summary>
+      <p>Apa aja yang support format OpenAI: aplikasi chat, coding assistant, agent dengan function calling, automation, riset. Base URL-nya <code>https://ai.nandzstore.com/v1</code>.</p>
+    </details>
+    <details>
+      <summary>Bagaimana kalau API-nya down?</summary>
+      <p>Garansi refund 100% untuk masa aktif yang terganggu. Status operasional bisa dicek kapan aja — kalau kami nggak bisa kasih layanan, kamu nggak bayar.</p>
+    </details>
+    <details>
+      <summary>Apakah chat saya disimpan?</summary>
+      <p>Tidak. Kami cuma catat usage (jumlah request/token), error rate, dan latency per key buat monitoring. Isi prompt dan response nggak pernah disimpan.</p>
+    </details>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap foot">
+    <span class="mono">NANDZ·AI — nandzstore.com</span>
+    <span>© 2026 Nandz Store. Batch percobaan.</span>
+  </div>
+</footer>
+
+<script>
+  /* GANTI: link Telegram store */
+  var TELEGRAM_URL = "https://t.me/ainandzbot";
+  var CLAIM_URL = "https://t.me/ainandzclaimbot";
+  ["cta-top","cta-hero","cta-price"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.href = TELEGRAM_URL;
+  });
+  var claimEl = document.getElementById("cta-claim");
+  if (claimEl) claimEl.href = CLAIM_URL;
+</script>
+</body>
+</html>
