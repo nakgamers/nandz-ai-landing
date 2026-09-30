@@ -36,6 +36,7 @@
   .btn:hover{opacity:.92;transform:translateY(-1px)}
   .btn-ghost{background:transparent;color:var(--text);border:1px solid var(--border)}
   .btn-ghost:hover{border-color:var(--faint);opacity:1}
+  .btn-disabled{background:var(--surface2);color:var(--muted);border:1px solid var(--border-soft);cursor:default;pointer-events:none}
   /* hero */
   .hero{padding:96px 0 72px;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
   .eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:20px}
@@ -170,15 +171,15 @@
   <section id="gratis">
     <div class="sec-label">Gratis</div>
     <h2>Coba dulu, bayar nanti.</h2>
-    <p class="sec-sub">Masih ragu? Claim key bansos — gratis 24 jam buat ngetes. Limit 60 request/menit, cukup buat buktiin API-nya beneran jalan.</p>
+    <p class="sec-sub">Masa testing Nandz Store telah selesai — terima kasih untuk semua yang sudah ikut ngetes.</p>
     <div class="claim-card">
       <div>
         <div class="claim-bot">@ainandzclaimbot</div>
-        <div class="claim-desc">Chat bot-nya, ketik <code>/claim</code>, key langsung dikirim ke kamu. Satu key per akun Telegram.</div>
+        <div class="claim-desc">Program key bansos sudah ditutup per 1 Oktober 2026. Total <strong>93</strong> key diklaim selama masa testing.</div>
       </div>
       <div class="claim-cta">
-        <div class="claim-count"><strong id="claim-count-num">…</strong> key bansos sudah diklaim</div>
-        <a class="btn" href="#" id="cta-claim">Claim Key Gratis</a>
+        <div class="claim-count"><strong>93</strong> key bansos sudah diklaim</div>
+        <span class="btn btn-disabled">Testing Selesai</span>
       </div>
     </div>
   </section>
@@ -250,22 +251,10 @@
 <script>
   /* GANTI: link Telegram store */
   var TELEGRAM_URL = "https://t.me/ainandzbot";
-  var CLAIM_URL = "https://t.me/ainandzclaimbot";
   ["cta-top","cta-hero","cta-price"].forEach(function(id){
     var el = document.getElementById(id);
     if (el) el.href = TELEGRAM_URL;
   });
-  var claimEl = document.getElementById("cta-claim");
-  if (claimEl) claimEl.href = CLAIM_URL;
-  /* jumlah key bansos yang sudah diklaim */
-  (function(){
-    var numEl = document.getElementById("claim-count-num");
-    if (!numEl) return;
-    fetch("/api/claim-count", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(d){
-      if (d && typeof d.count === "number") numEl.textContent = d.count.toLocaleString("id-ID");
-      else numEl.parentNode.style.display = "none";
-    }).catch(function(){ numEl.parentNode.style.display = "none"; });
-  })();
 </script>
 </body>
 </html>
