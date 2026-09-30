@@ -171,8 +171,8 @@
     <p class="sec-sub">Masih ragu? Claim key bansos — gratis 24 jam buat ngetes. Limit 20 request/menit, cukup buat buktiin API-nya beneran jalan.</p>
     <div class="claim-card">
       <div>
-        <div class="claim-bot">api.nandzstore.com</div>
-        <div class="claim-desc">Buka halamannya, login dengan Telegram, key langsung diterbitkan. Satu key per akun, satu key per device.</div>
+        <div class="claim-bot">@ainandzclaimbot</div>
+        <div class="claim-desc">Chat bot-nya, ketik <code>/claim</code>, key langsung dikirim ke kamu. Satu key per akun Telegram.</div>
       </div>
       <a class="btn" href="#" id="cta-claim">Claim Key Gratis</a>
     </div>
@@ -245,7 +245,7 @@
 <script>
   /* GANTI: link Telegram store */
   var TELEGRAM_URL = "https://t.me/ainandzbot";
-  var CLAIM_URL = "https://api.nandzstore.com";
+  var CLAIM_URL = "https://t.me/ainandzclaimbot";
   ["cta-top","cta-hero","cta-price"].forEach(function(id){
     var el = document.getElementById(id);
     if (el) el.href = TELEGRAM_URL;
