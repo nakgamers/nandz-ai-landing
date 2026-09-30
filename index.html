@@ -96,7 +96,9 @@
   .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;font-size:13px;color:var(--faint)}
   .foot .mono{font-family:var(--mono);font-size:12px}
   .claim-card{display:flex;align-items:center;justify-content:space-between;gap:24px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px 36px;flex-wrap:wrap}
-  .claim-bot{font-family:var(--mono);font-size:20px;font-weight:500;margin-bottom:10px}
+  .claim-cta{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  .claim-count{font-size:12.5px;color:var(--muted)}
+  .claim-count strong{color:var(--text);font-weight:600}
   .claim-bot::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--accent);margin-right:12px;box-shadow:0 0 8px rgba(52,211,153,.7)}
   .claim-desc{font-size:14px;color:var(--muted);max-width:52ch}
   .claim-desc code{font-family:var(--mono);font-size:.88em;color:var(--text);background:var(--surface2);padding:2px 7px;border-radius:5px;border:1px solid var(--border-soft)}
@@ -168,13 +170,16 @@
   <section id="gratis">
     <div class="sec-label">Gratis</div>
     <h2>Coba dulu, bayar nanti.</h2>
-    <p class="sec-sub">Masih ragu? Claim key bansos — gratis 24 jam buat ngetes. Limit 20 request/menit, cukup buat buktiin API-nya beneran jalan.</p>
+    <p class="sec-sub">Masih ragu? Claim key bansos — gratis 24 jam buat ngetes. Limit 60 request/menit, cukup buat buktiin API-nya beneran jalan.</p>
     <div class="claim-card">
       <div>
         <div class="claim-bot">@ainandzclaimbot</div>
         <div class="claim-desc">Chat bot-nya, ketik <code>/claim</code>, key langsung dikirim ke kamu. Satu key per akun Telegram.</div>
       </div>
-      <a class="btn" href="#" id="cta-claim">Claim Key Gratis</a>
+      <div class="claim-cta">
+        <div class="claim-count"><strong id="claim-count-num">…</strong> key bansos sudah diklaim</div>
+        <a class="btn" href="#" id="cta-claim">Claim Key Gratis</a>
+      </div>
     </div>
   </section>
 
@@ -252,6 +257,15 @@
   });
   var claimEl = document.getElementById("cta-claim");
   if (claimEl) claimEl.href = CLAIM_URL;
+  /* jumlah key bansos yang sudah diklaim */
+  (function(){
+    var numEl = document.getElementById("claim-count-num");
+    if (!numEl) return;
+    fetch("/api/claim-count", {cache: "no-store"}).then(function(r){ return r.json(); }).then(function(d){
+      if (d && typeof d.count === "number") numEl.textContent = d.count.toLocaleString("id-ID");
+      else numEl.parentNode.style.display = "none";
+    }).catch(function(){ numEl.parentNode.style.display = "none"; });
+  })();
 </script>
 </body>
 </html>
